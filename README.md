@@ -10,7 +10,7 @@ git clone -c core.symlinks=true https://github.com/Az-21/dotfiles.git
 ## Installation
 This python script detects the OS and installs the dotfiles automatically.
 
-It works off the assumption that all dotfiles will be placed relative to `$HOME`/`~`.
+It works off the assumption that all dotfiles will be placed relative to `$HOME` (aka `~`).
 
 ```py
 cd ./install
