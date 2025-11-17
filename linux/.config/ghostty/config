@@ -1,0 +1,5 @@
+# ~/.config/ghostty/config
+
+font-family = Monaspace Neon NF
+window-padding-x = 12
+theme = Monokai Remastered
