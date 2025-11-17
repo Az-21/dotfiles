@@ -1,4 +1,4 @@
-# ~/Documents/PowerShell/Profile.ps1
+# $HOME/Documents/PowerShell/Profile.ps1
 
 # Alias first party tools and commands
 New-Alias e Explorer

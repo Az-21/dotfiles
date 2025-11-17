@@ -1,4 +1,4 @@
-# ~/.config/ghostty/config
+# $HOME/.config/ghostty/config
 
 font-family = Monaspace Neon NF
 window-padding-x = 12
