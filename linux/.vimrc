@@ -6,7 +6,7 @@ set ignorecase
 set number
 set relativenumber
 
-" Convert tabs to spaces 
+" Convert tabs to spaces
 set expandtab
 
 " Copy to system clipboard
