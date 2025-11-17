@@ -12,7 +12,7 @@ This python script detects the OS and installs the dotfiles automatically.
 
 It works off the assumption that all dotfiles will be placed relative to `$HOME` (aka `~`).
 
-```py
+```sh
 cd ./install
 uv sync
 uv run main.py
