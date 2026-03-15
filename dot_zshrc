@@ -12,15 +12,18 @@ alias cat="bat"
 alias cd="z"
 alias find="fd"
 alias grep="rg"
-alias l="eza --icons --group-directories-first -l --git"
-alias la="eza --icons --group-directories-first -la --git"
-alias ls="eza --icons --group-directories-first"
-alias lt="eza --icons --tree --level=2"
-alias lta="eza --icons --tree --level=2 -a"
 alias pip="uv pip"
 alias venv="uv venv"
 alias vi="nvim"
 alias vim="nvim"
+
+# eza (ls/tree replacements)
+alias la="eza --icons --group-directories-first -la --header --git"
+alias ll="eza --icons --group-directories-first -l --header --git"
+alias ls="eza --icons --group-directories-first"
+alias lt="tree --level=2"
+alias lta="tree --level=2 -a"
+alias tree="eza --icons --tree --group-directories-first"
 
 # yazi — open file manager in current dir, and cd into last visited dir on exit
 function y() {
