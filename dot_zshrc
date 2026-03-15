@@ -1,0 +1,45 @@
+# PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Environment
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="bat --plain"
+export MANPAGER="sh -c 'col -bx | bat -l man --plain'"
+
+# Modern tooling
+alias cat="bat"
+alias cd="z"
+alias find="fd"
+alias grep="rg"
+alias l="eza --icons --group-directories-first -l --git"
+alias la="eza --icons --group-directories-first -la --git"
+alias ls="eza --icons --group-directories-first"
+alias lt="eza --icons --tree --level=2"
+alias lta="eza --icons --tree --level=2 -a"
+alias pip="uv pip"
+alias venv="uv venv"
+alias vi="nvim"
+alias vim="nvim"
+
+# yazi — open file manager in current dir, and cd into last visited dir on exit
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    z "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+# Autocomplete
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # case-insensitive completion
+
+# Initialzie tools
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(fnm env --use-on-cd)"
+eval "$(atuin init zsh)"
+eval "$(fzf --zsh)"
