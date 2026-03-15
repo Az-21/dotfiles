@@ -1,0 +1,28 @@
+" General Settings
+set ignorecase
+set smartcase             " Override ignorecase if search contains uppercase
+set number
+set relativenumber
+set clipboard=unnamedplus " Copy to system clipboard
+
+" UI & UX
+set cursorline            " Highlight the line the cursor is on
+set scrolloff=8           " Keep 8 lines above/below cursor when scrolling
+set termguicolors         " Enable 24-bit RGB colors
+set signcolumn=yes        " Always show the column for git/linting icons to prevent jumping
+
+" Indentation
+set expandtab
+set shiftwidth=2          " Number of spaces to use for each step of indent
+set tabstop=2             " Number of spaces that a <Tab> counts for
+set autoindent
+
+" Search & Undo
+set incsearch             " Show search matches as you type
+set hlsearch              " Highlight search results
+
+" Keybindings
+let mapleader = " "
+
+" Clear highlights with leader + l
+nnoremap <leader>l :nohlsearch<CR>
