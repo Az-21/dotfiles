@@ -1,0 +1,9 @@
+# Include .zshrc ONLY on Linux and macOS
+{{- if not (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) }}
+.zshrc
+{{- end }}
+
+# Include PowerShell ONLY on Windows
+{{- if ne .chezmoi.os "windows" }}
+Documents/PowerShell
+{{- end }}
