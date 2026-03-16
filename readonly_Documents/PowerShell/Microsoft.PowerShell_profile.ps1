@@ -1,9 +1,3 @@
-# Environment
-$env:EDITOR = "nvim"
-$env:VISUAL = "nvim"
-$env:PAGER = "bat --plain"
-$env:MANPAGER = "sh -c 'col -bx | bat -l man --plain'"
-
 # Remove Conflicting Default PowerShell Aliases
 $conflicting = @("cat", "cd", "ls", "tree")
 foreach ($alias in $conflicting) {
