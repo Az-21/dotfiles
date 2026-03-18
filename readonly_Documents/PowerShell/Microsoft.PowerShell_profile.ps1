@@ -42,6 +42,27 @@ function y {
     }
 }
 
+# fzf terminal history
+Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
+    $buffer = ""
+    $cursor = 0
+    # Capture what is currently typed in the prompt
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$buffer, [ref]$cursor)
+
+    # Locate the global PowerShell history file
+    $historyPath = (Get-PSReadLineOption).HistorySavePath
+
+    if (Test-Path $historyPath) {
+        $selected = Get-Content $historyPath | fzf --query="$buffer" --tac --tiebreak=index
+
+        if (-not [string]::IsNullOrWhiteSpace($selected)) {
+            # Replace the current line with the fzf selection
+            [Microsoft.PowerShell.PSConsoleReadLine]::Replace(0, $buffer.Length, $selected)
+            [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($selected.Length)
+        }
+    }
+}
+
 # Autocomplete
 # Case-insensitive completion is the default in PowerShell.
 # For advanced menu selection similar to Zsh, PSReadLine handles this natively.
@@ -55,4 +76,3 @@ function touch { $args | ForEach-Object { New-Item -ItemType File -Path $_ -Forc
 Invoke-Expression (&starship init powershell)
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 # Invoke-Expression (&fnm env --use-on-cd --shell powershell)
-atuin init powershell | Out-String | Invoke-Expression
