@@ -37,6 +37,7 @@ function y() {
 }
 
 # fzf terminal history
+export FZF_CTRL_R_OPTS="--height 100% --no-cycle"
 source <(fzf --zsh) 2>/dev/null
 bindkey '^[OA' fzf-history-widget
 bindkey '^[[A' fzf-history-widget
@@ -44,10 +45,6 @@ bindkey '^[[A' fzf-history-widget
 # Plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
     HOMEBREW_PREFIX="/opt/homebrew"
-
-    if [ -f "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]; then
-        source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
-    fi
 
     if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
         source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
