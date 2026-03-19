@@ -12,17 +12,18 @@ alias cat="bat"
 alias cd="z"
 alias find="fd"
 alias grep="rg"
-alias pip="uv pip"
-alias venv="uv venv"
 alias vi="nvim"
 alias vim="nvim"
+alias filehash="sha256sum"
+pip() { uv pip "$@" }
+venv() { uv venv "$@" }
 
 # eza (ls/tree replacements)
 alias la="eza --icons --group-directories-first -la --header --git"
 alias ll="eza --icons --group-directories-first -l --header --git"
 alias ls="eza --icons --group-directories-first"
-alias lt="tree --level=2"
-alias lta="tree --level=2 -a"
+alias lt="eza --icons --tree --level=2 --group-directories-first"
+alias lta="eza --icons --tree --level=2 -a --group-directories-first"
 alias tree="eza --icons --tree --group-directories-first"
 
 # yazi — open file manager in current dir, and cd into last visited dir on exit
@@ -35,14 +36,30 @@ function y() {
   rm -f -- "$tmp"
 }
 
-# Autocomplete
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  # case-insensitive completion
+# fzf terminal history
+source <(fzf --zsh) 2>/dev/null
+bindkey '^[OA' fzf-history-widget
+bindkey '^[[A' fzf-history-widget
+
+# Plugins
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    HOMEBREW_PREFIX="/opt/homebrew"
+
+    if [ -f "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]; then
+        source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+    fi
+
+    if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+        source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    fi
+
+    if [ -f "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+        source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    fi
+fi
 
 # Initialzie tools
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fnm env --use-on-cd)"
-eval "$(atuin init zsh)"
 eval "$(fzf --zsh)"
