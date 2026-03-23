@@ -63,11 +63,6 @@ Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
     }
 }
 
-# Autocomplete
-# Case-insensitive completion is the default in PowerShell.
-# For advanced menu selection similar to Zsh, PSReadLine handles this natively.
-Set-PSReadLineOption -PredictionSource History # (Optional: Enables ghost-text suggestions)
-
 # Time savers
 Set-Alias hash Get-FileHash
 function touch { $args | ForEach-Object { New-Item -ItemType File -Path $_ -Force } }
