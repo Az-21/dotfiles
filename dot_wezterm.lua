@@ -11,8 +11,8 @@ end
 config.color_scheme = "Monokai Remastered"
 config.font = wezterm.font "MonaspiceAr Nerd Font"
 config.font_size = 16
-config.initial_cols = 160
-config.initial_rows = 40
+config.initial_cols = 120
+config.initial_rows = 30
 
 
 config.window_padding = {
@@ -22,7 +22,6 @@ config.window_padding = {
   bottom = 8,
 }
 
-config.window_decorations = "RESIZE"
 config.hide_mouse_cursor_when_typing = true
 
 -- Keyboard
