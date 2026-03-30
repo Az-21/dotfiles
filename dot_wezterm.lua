@@ -1,19 +1,22 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
--- Use PowerShell 7+ instead of CMD
+---- OS Detection
 local is_windows = wezterm.target_triple:find("windows") ~= nil
+
 if is_windows then
+  -- Use PowerShell 7+ instead of CMD on Windows
   config.default_prog = { "pwsh.exe", "-NoLogo" }
+else
+  -- Hide window decorations on Linux and macOS
+  config.window_decorations = "RESIZE"
 end
 
--- Appearance
-config.color_scheme = "Monokai Remastered"
-config.font = wezterm.font "MonaspiceAr Nerd Font"
+---- Appearance & Behavior
+config.font = wezterm.font("MonaspiceAr Nerd Font")
 config.font_size = 16
 config.initial_cols = 120
 config.initial_rows = 30
-
 
 config.window_padding = {
   left = 12,
@@ -23,48 +26,60 @@ config.window_padding = {
 }
 
 config.hide_mouse_cursor_when_typing = true
+config.scrollback_lines = 10000
 
--- Keyboard
+-- Tab Bar
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = false
+config.tab_max_width = 32
+
+-- Cursor
+config.default_cursor_style = "SteadyBlock"
+
+---- Keyboard Shortcuts
 local act = wezterm.action
+
+-- Define the Leader key (CTRL + Space)
+config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
   -- Split panes
-  { key = "d", mods = "SUPER",       action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-  { key = "d", mods = "SUPER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "d", mods = "LEADER",       action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "d", mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
   -- Navigate panes
-  { key = "LeftArrow",  mods = "SUPER|OPT", action = act.ActivatePaneDirection("Left") },
-  { key = "RightArrow", mods = "SUPER|OPT", action = act.ActivatePaneDirection("Right") },
-  { key = "UpArrow",    mods = "SUPER|OPT", action = act.ActivatePaneDirection("Up") },
-  { key = "DownArrow",  mods = "SUPER|OPT", action = act.ActivatePaneDirection("Down") },
+  { key = "LeftArrow",  mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+  { key = "RightArrow", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+  { key = "UpArrow",    mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+  { key = "DownArrow",  mods = "LEADER", action = act.ActivatePaneDirection("Down") },
 
-  -- New tab
-  { key = "t", mods = "SUPER", action = act.SpawnTab("CurrentPaneDomain") },
+  -- Tabs
+  { key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+  { key = "w", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
+  { key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+  { key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
 
-  -- Close tab / pane
-  { key = "w", mods = "SUPER", action = act.CloseCurrentPane({ confirm = true }) },
-
-  -- Cycle tabs
-  { key = "[", mods = "SUPER|SHIFT", action = act.ActivateTabRelative(-1) },
-  { key = "]", mods = "SUPER|SHIFT", action = act.ActivateTabRelative(1) },
+  -- QuickSelect (Extracts URLs, IP addresses, paths, etc.)
+  { key = "Space", mods = "CTRL|SHIFT", action = act.QuickSelect },
 
   -- Font size
-  { key = "=", mods = "SUPER", action = act.IncreaseFontSize },
-  { key = "-", mods = "SUPER", action = act.DecreaseFontSize },
-  { key = "0", mods = "SUPER", action = act.ResetFontSize },
+  { key = "=", mods = "CTRL", action = act.IncreaseFontSize },
+  { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+  { key = "0", mods = "CTRL", action = act.ResetFontSize },
 
   -- Fullscreen
-  { key = "Enter", mods = "SUPER", action = act.ToggleFullScreen },
+  { key = "Enter", mods = "CTRL|SHIFT", action = act.ToggleFullScreen },
 
   -- Copy / Paste
-  { key = "c", mods = "SUPER", action = act.CopyTo("Clipboard") },
-  { key = "v", mods = "SUPER", action = act.PasteFrom("Clipboard") },
+  { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
+  { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
 
   -- Search
-  { key = "f", mods = "SUPER", action = act.Search({ CaseInSensitiveString = "" }) },
+  { key = "f", mods = "CTRL|SHIFT", action = act.Search({ CaseInSensitiveString = "" }) },
 
   -- Reload config
-  { key = "r", mods = "SUPER|SHIFT", action = act.ReloadConfiguration },
+  { key = "r", mods = "CTRL|SHIFT|ALT", action = act.ReloadConfiguration },
 }
 
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
