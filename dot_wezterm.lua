@@ -2,18 +2,30 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 ---- OS Detection
+local is_linux = wezterm.target_triple:find("linux") ~= nil
 local is_windows = wezterm.target_triple:find("windows") ~= nil
+local is_macos = wezterm.target_triple:find("darwin") ~= nil
 
-if is_windows then
-  -- Use PowerShell 7+ instead of CMD on Windows
-  config.default_prog = { "pwsh.exe", "-NoLogo" }
-else
+if is_linux then
+  -- Use zsh
+  config.default_prog = { "zsh" }
+end
+
+if is_macos then
   -- Hide window decorations on Linux and macOS
   config.window_decorations = "RESIZE"
 end
 
+if is_windows then
+  -- Use PowerShell 7+
+  config.default_prog = { "pwsh.exe", "-NoLogo" }
+end
+
 ---- Appearance & Behavior
-config.font = wezterm.font("MonaspiceAr Nerd Font")
+config.font = wezterm.font_with_fallback {
+  "Monaspace Argon NF",
+  "JetBrains Mono",
+}
 config.font_size = 16
 config.initial_cols = 120
 config.initial_rows = 30
