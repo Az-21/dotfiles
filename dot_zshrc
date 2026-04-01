@@ -7,6 +7,21 @@ export VISUAL="nvim"
 export PAGER="bat --plain"
 export MANPAGER="sh -c 'col -bx | bat -l man --plain'"
 
+# Completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# History
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt APPEND_HISTORY        # Append instead of overwrite on exit
+setopt INC_APPEND_HISTORY    # Write to file immediately, not just on exit
+setopt SHARE_HISTORY         # Share history across all open sessions
+setopt HIST_IGNORE_DUPS      # Don't record consecutive duplicates
+setopt HIST_IGNORE_SPACE     # Don't record commands prefixed with a space
+setopt HIST_REDUCE_BLANKS    # Strip superfluous whitespace
+
 # Modern tooling
 alias cat="bat"
 alias cd="z"
@@ -30,28 +45,51 @@ alias tree="eza --icons --tree --group-directories-first"
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   yazi "$@" --cwd-file="$tmp"
+
   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
     z "$cwd"
   fi
+
   rm -f -- "$tmp"
 }
 
-# fzf terminal history
-export FZF_CTRL_R_OPTS="--height 100% --no-cycle"
-source <(fzf --zsh) 2>/dev/null
-bindkey '^[OA' fzf-history-widget
-bindkey '^[[A' fzf-history-widget
+# Terminal history
+function tv-history-up() {
+    local selected
+
+    if [[ -n "$BUFFER" ]]; then
+        selected=$(fc -rnl 1 | rg -iF "$BUFFER" | tv)
+    else
+        selected=$(fc -rnl 1 | tv)
+    fi
+
+    if [[ -n "$selected" ]]; then
+        BUFFER="$selected"
+        CURSOR=${#BUFFER}
+    fi
+
+    zle reset-prompt
+}
+
+zle -N tv-history-up
+bindkey '^[[A' tv-history-up
+bindkey '^[OA' tv-history-up
+
 
 # zsh Plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
     HOMEBREW_PREFIX="/opt/homebrew"
+
     if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
         source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     fi
+
     if [ -f "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
         source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     fi
+
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
     # Common Linux paths for zsh plugins (Arch + Debian + Manual)
     _ZSH_PLUGIN_DIRS=(
         /usr/share/zsh/plugins
@@ -87,5 +125,4 @@ fi
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-eval "$(fnm env --use-on-cd)"
-eval "$(fzf --zsh)"
+eval "$(fnm env --shell zsh)"
