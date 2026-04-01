@@ -126,3 +126,8 @@ eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fnm env --shell zsh)"
+
+# Fastfetch on launch
+if [[ -o interactive ]]; then
+    fastfetch
+fi
