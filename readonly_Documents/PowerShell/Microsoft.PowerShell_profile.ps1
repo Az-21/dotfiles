@@ -8,7 +8,7 @@ foreach ($alias in $conflicting) {
 
 # Modern Tooling
 Set-Alias cat bat
-Set-Alias cd zoxide
+Set-Alias cd z
 Set-Alias find fd
 Set-Alias grep rg
 Set-Alias vi nvim
