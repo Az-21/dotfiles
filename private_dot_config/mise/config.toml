@@ -2,7 +2,6 @@
 bat = "latest"
 bottom = "latest"
 chezmoi = "latest"
-claude = "latest"
 delta = "latest"
 dust = "latest"
 eza = "latest"
