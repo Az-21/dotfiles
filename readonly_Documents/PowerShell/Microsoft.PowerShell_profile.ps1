@@ -8,7 +8,7 @@ foreach ($alias in $conflicting) {
 
 # Modern Tooling
 Set-Alias cat bat
-Set-Alias cd z
+Set-Alias cd zoxide
 Set-Alias find fd
 Set-Alias grep rg
 Set-Alias vi nvim
@@ -86,4 +86,4 @@ function Add-Path {
 (&mise activate pwsh) | Out-String | Invoke-Expression
 Invoke-Expression (&starship init powershell)
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
-fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+fnm env --shell powershell | Out-String | Invoke-Expression
