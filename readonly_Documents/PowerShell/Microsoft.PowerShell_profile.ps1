@@ -67,7 +67,23 @@ Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
 Set-Alias hash Get-FileHash
 function touch { $args | ForEach-Object { New-Item -ItemType File -Path $_ -Force } }
 
+# Add folder to PATH
+# Add-Path -NewPath "C:\full\path\here"
+# Add-Path -NewPath "C:\full\path\here" -Scope Machine
+function Add-Path {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$NewPath,
+        [System.EnvironmentVariableTarget]$Scope = [System.EnvironmentVariableTarget]::User
+    )
+
+    $current = [System.Environment]::GetEnvironmentVariable("Path", $Scope)
+    $updatedParts = ($current -split ';' | Where-Object { $_ }) + $NewPath | Select-Object -Unique
+    [System.Environment]::SetEnvironmentVariable("Path", ($updatedParts -join ';'), $Scope)
+}
+
 # Initialize Tools
+(&mise activate pwsh) | Out-String | Invoke-Expression
 Invoke-Expression (&starship init powershell)
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
-# Invoke-Expression (&fnm env --use-on-cd --shell powershell)
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
