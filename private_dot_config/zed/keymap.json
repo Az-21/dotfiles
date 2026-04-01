@@ -1,0 +1,13 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-a": "editor::SelectAll",
+      "ctrl-c": "editor::Copy",
+      "ctrl-s": "workspace::Save",
+      "ctrl-v": "editor::Paste",
+      "ctrl-x": "editor::Cut",
+      "ctrl-z": "editor::Undo",
+    },
+  },
+]

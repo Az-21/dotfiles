@@ -1,0 +1,57 @@
+{
+  "base_keymap": "VSCode",
+  "format_on_save": "on",
+  "buffer_font_size": 18,
+  "ui_font_size": 16,
+  "restore_on_startup": "launchpad",
+  "buffer_font_family": "Monaspace Argon",
+  "buffer_font_features": {
+    "calt": true,
+    "liga": true,
+    "ss01": true,
+    "ss02": true,
+    "ss03": true,
+    "ss04": true,
+    "ss05": true,
+    "ss06": true,
+    "ss07": true,
+    "ss08": true,
+    "ss09": true,
+    "ss10": true,
+  },
+  "terminal": {
+    "font_features": {
+      "calt": true,
+      "liga": true,
+    },
+  },
+  "colorize_brackets": true,
+  "inlay_hints": {
+    "enabled": true,
+    "show_background": true,
+  },
+  "preferred_line_length": 120,
+  "project_panel": {
+    "dock": "right",
+  },
+  "show_whitespaces": "trailing",
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "theme": {
+    "mode": "dark",
+    "dark": "Ayu Dark",
+    "light": "One Light",
+  },
+  "vim_mode": true,
+  "vim": {
+    "highlight_on_yank_duration": 300,
+    "toggle_relative_line_numbers": true,
+    "use_smartcase_find": true,
+  },
+}
