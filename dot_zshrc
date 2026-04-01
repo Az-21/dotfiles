@@ -42,17 +42,45 @@ source <(fzf --zsh) 2>/dev/null
 bindkey '^[OA' fzf-history-widget
 bindkey '^[[A' fzf-history-widget
 
-# Plugins
+# zsh Plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
     HOMEBREW_PREFIX="/opt/homebrew"
-
     if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
         source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     fi
-
     if [ -f "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
         source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     fi
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Common Linux paths for zsh plugins (Arch + Debian + Manual)
+    _ZSH_PLUGIN_DIRS=(
+        /usr/share/zsh/plugins
+        /usr/share/zsh-autosuggestions
+        /usr/share/zsh-syntax-highlighting
+        /usr/local/share/zsh/plugins
+    )
+
+    for _dir in "${_ZSH_PLUGIN_DIRS[@]}"; do
+        if [ -f "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+            source "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
+            break
+        elif [ -f "$_dir/zsh-autosuggestions.zsh" ]; then
+            source "$_dir/zsh-autosuggestions.zsh"
+            break
+        fi
+    done
+
+    for _dir in "${_ZSH_PLUGIN_DIRS[@]}"; do
+        if [ -f "$_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+            source "$_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+            break
+        elif [ -f "$_dir/zsh-syntax-highlighting.zsh" ]; then
+            source "$_dir/zsh-syntax-highlighting.zsh"
+            break
+        fi
+    done
+
+    unset _dir _ZSH_PLUGIN_DIRS
 fi
 
 # Initialzie tools
