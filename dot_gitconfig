@@ -1,0 +1,21 @@
+[user]
+    name = Abhishek Choudhary
+    signingkey = ~/.ssh/id_ed25519_github_az21.pub
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
+[init]
+    defaultBranch = main
+
+[color]
+    ui = auto
+
+[push]
+    default = simple
+
+[fetch]
+    prune = true
