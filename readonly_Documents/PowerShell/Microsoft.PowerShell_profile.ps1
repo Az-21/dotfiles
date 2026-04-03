@@ -86,4 +86,3 @@ function Add-Path {
 (&mise activate pwsh) | Out-String | Invoke-Expression
 Invoke-Expression (&starship init powershell)
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
-fnm env --shell powershell | Out-String | Invoke-Expression
