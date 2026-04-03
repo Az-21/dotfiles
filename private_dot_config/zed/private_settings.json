@@ -1,6 +1,7 @@
 {
   "base_keymap": "VSCode",
   "format_on_save": "on",
+  "soft_wrap": "editor_width",
   "buffer_font_size": 18,
   "ui_font_size": 16,
   "restore_on_startup": "launchpad",
