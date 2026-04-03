@@ -1,7 +1,6 @@
 [user]
     name = Abhishek Choudhary
     signingkey = ~/.ssh/id_ed25519_github_az21.pub
-	email = 
 
 [gpg]
     format = ssh
