@@ -41,6 +41,10 @@ alias lt="eza --icons --tree --level=2 --group-directories-first"
 alias lta="eza --icons --tree --level=2 -a --group-directories-first"
 alias tree="eza --icons --tree --group-directories-first"
 
+# GitHub Desktop Plus
+# Start from the repo folder for poorly configured git hooks
+alias ghplus="nohup github-desktop-plus > /dev/null 2>&1 & disown"
+
 # yazi — open file manager in current dir, and cd into last visited dir on exit
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -56,21 +60,17 @@ function y() {
 # Terminal history
 function tv-history-up() {
     local selected
-
     if [[ -n "$BUFFER" ]]; then
-        selected=$(fc -rnl 1 | rg -iF "$BUFFER" | tv)
+        selected=$(fc -rnl 1 | awk '!seen[$0]++' | rg -iF "$BUFFER" | tv --input-position bottom --no-preview)
     else
-        selected=$(fc -rnl 1 | tv)
+        selected=$(fc -rnl 1 | awk '!seen[$0]++' | tv --input-position bottom --no-preview)
     fi
-
     if [[ -n "$selected" ]]; then
         BUFFER="$selected"
         CURSOR=${#BUFFER}
     fi
-
     zle reset-prompt
 }
-
 zle -N tv-history-up
 bindkey '^[[A' tv-history-up
 bindkey '^[OA' tv-history-up
