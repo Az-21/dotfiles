@@ -121,19 +121,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     unset _dir _ZSH_PLUGIN_DIRS
 fi
 
-# fnm
-FNM_PATH=~/.local/share/fnm/
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "$(fnm env --shell zsh)"
-fi
-
 # Initialzie tools
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-
-# Fastfetch on launch
-if [[ -o interactive ]]; then
-    fastfetch
-fi
