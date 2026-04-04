@@ -1,5 +1,6 @@
 {
   "base_keymap": "VSCode",
+  "icon_theme": "Material Icon Theme",
   "format_on_save": "on",
   "soft_wrap": "editor_width",
   "buffer_font_size": 18,
@@ -54,5 +55,14 @@
     "highlight_on_yank_duration": 300,
     "toggle_relative_line_numbers": true,
     "use_smartcase_find": true,
+  },
+  "auto_install_extensions": {
+    "dockerfile": true,
+    "harper": true,
+    "material-icon-theme": true,
+    "powershell": true,
+    "sql": true,
+    "svelte": true,
+    "toml": true,
   },
 }
