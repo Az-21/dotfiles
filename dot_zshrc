@@ -80,6 +80,10 @@ zle -N tv-history-up
 bindkey '^[[A' tv-history-up
 bindkey '^[OA' tv-history-up
 
+# Copy
+if command -v wl-copy >/dev/null 2>&1; then
+  alias copy="wl-copy --trim-newline"
+fi
 
 # zsh Plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
