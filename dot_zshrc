@@ -82,7 +82,7 @@ bindkey '^[OA' tv-history-up
 
 # Copy
 if command -v wl-copy >/dev/null 2>&1; then
-  alias copy="wl-copy --trim-newline"
+  alias clipboard="wl-copy --trim-newline"
 fi
 
 # zsh Plugins
