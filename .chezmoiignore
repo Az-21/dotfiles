@@ -1,9 +1,11 @@
-# Include .zshrc ONLY on Linux and macOS
+# Files ONLY for Linux and macOS
 {{- if not (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) }}
 .zshrc
+.config/zed/
 {{- end }}
 
-# Include PowerShell ONLY on Windows
+# Files ONLY for Windows
 {{- if ne .chezmoi.os "windows" }}
 Documents/PowerShell
+AppData/
 {{- end }}
