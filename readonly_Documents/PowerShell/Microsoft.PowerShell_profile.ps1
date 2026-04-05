@@ -53,7 +53,13 @@ Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
     $historyPath = (Get-PSReadLineOption).HistorySavePath
 
     if (Test-Path $historyPath) {
-        $selected = Get-Content $historyPath | fzf --query="$buffer" --tac --tiebreak=index
+        # Read history, deduplicate (keeping latest), and pass to fzf
+        $history = Get-Content $historyPath
+        [array]::Reverse($history)
+        $uniqueHistory = $history | Select-Object -Unique
+        [array]::Reverse($uniqueHistory)
+
+        $selected = $uniqueHistory | fzf --query="$buffer" --tac --tiebreak=index
 
         if (-not [string]::IsNullOrWhiteSpace($selected)) {
             # Replace the current line with the fzf selection
