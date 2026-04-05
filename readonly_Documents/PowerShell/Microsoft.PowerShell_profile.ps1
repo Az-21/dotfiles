@@ -70,6 +70,7 @@ Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
 }
 
 # Time savers
+Set-Alias clipboard Set-Clipboard
 Set-Alias hash Get-FileHash
 function touch { $args | ForEach-Object { New-Item -ItemType File -Path $_ -Force } }
 
