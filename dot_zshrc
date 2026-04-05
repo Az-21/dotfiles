@@ -46,7 +46,9 @@ alias tree="eza --icons --tree --group-directories-first"
 alias ghplus="nohup github-desktop-plus > /dev/null 2>&1 & disown"
 
 # Arch extra/zed installs zed as zeditor
-alias zed="zeditor"
+if command -v zeditor >/dev/null 2>&1; then
+  alias zed="zeditor"
+fi
 
 # yazi — open file manager in current dir, and cd into last visited dir on exit
 function y() {
