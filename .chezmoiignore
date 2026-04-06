@@ -1,12 +1,12 @@
 # Files ONLY for Linux and macOS
 {{- if not (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) }}
-.zshrc
 .config/zed/
+.zshrc
 {{- end }}
 
 # Files ONLY for Windows
 {{- if ne .chezmoi.os "windows" }}
-Documents/PowerShell
 AppData/
+Documents/PowerShell
 dot_glzr/
 {{- end }}
