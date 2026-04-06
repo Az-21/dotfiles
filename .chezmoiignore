@@ -8,4 +8,5 @@
 {{- if ne .chezmoi.os "windows" }}
 Documents/PowerShell
 AppData/
+dot_glzr/
 {{- end }}
