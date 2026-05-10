@@ -42,33 +42,6 @@ function y {
     }
 }
 
-# fzf terminal history
-Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
-    $buffer = ""
-    $cursor = 0
-    # Capture what is currently typed in the prompt
-    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$buffer, [ref]$cursor)
-
-    # Locate the global PowerShell history file
-    $historyPath = (Get-PSReadLineOption).HistorySavePath
-
-    if (Test-Path $historyPath) {
-        # Read history, deduplicate (keeping latest), and pass to fzf
-        $history = Get-Content $historyPath
-        [array]::Reverse($history)
-        $uniqueHistory = $history | Select-Object -Unique
-        [array]::Reverse($uniqueHistory)
-
-        $selected = $uniqueHistory | fzf --query="$buffer" --tac --tiebreak=index
-
-        if (-not [string]::IsNullOrWhiteSpace($selected)) {
-            # Replace the current line with the fzf selection
-            [Microsoft.PowerShell.PSConsoleReadLine]::Replace(0, $buffer.Length, $selected)
-            [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($selected.Length)
-        }
-    }
-}
-
 # Time savers
 Set-Alias clipboard Set-Clipboard
 Set-Alias hash Get-FileHash
@@ -93,3 +66,4 @@ function Add-Path {
 (&mise activate pwsh) | Out-String | Invoke-Expression
 Invoke-Expression (&starship init powershell)
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
+atuin init powershell | Out-String | Invoke-Expression
