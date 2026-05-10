@@ -42,9 +42,10 @@ function y {
     }
 }
 
-# Time savers
-Set-Alias clipboard Set-Clipboard
-Set-Alias hash Get-FileHash
+# Consistent utility across OSes
+function clipboard { Set-Clipboard $args }
+function hash { Get-FileHash $args }
+function open { explorer $args }
 function touch { $args | ForEach-Object { New-Item -ItemType File -Path $_ -Force } }
 
 # Add folder to PATH
