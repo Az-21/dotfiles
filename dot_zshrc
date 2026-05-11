@@ -29,7 +29,6 @@ alias find="fd"
 alias grep="rg"
 alias vi="nvim"
 alias vim="nvim"
-alias filehash="sha256sum"
 pip() { uv pip "$@" }
 venv() { uv venv "$@" }
 
@@ -62,25 +61,8 @@ function y() {
   rm -f -- "$tmp"
 }
 
-# Terminal history
-function tv-history-up() {
-    local selected
-    if [[ -n "$BUFFER" ]]; then
-        selected=$(fc -rnl 1 | awk '!seen[$0]++' | rg -iF "$BUFFER" | tv --input-position bottom --no-preview)
-    else
-        selected=$(fc -rnl 1 | awk '!seen[$0]++' | tv --input-position bottom --no-preview)
-    fi
-    if [[ -n "$selected" ]]; then
-        BUFFER="$selected"
-        CURSOR=${#BUFFER}
-    fi
-    zle reset-prompt
-}
-zle -N tv-history-up
-bindkey '^[[A' tv-history-up
-bindkey '^[OA' tv-history-up
-
-# Copy
+# Consistent utility across OSes
+function hash { shasum -a 256 "$@" }
 if command -v wl-copy >/dev/null 2>&1; then
   alias clipboard="wl-copy --trim-newline"
 fi
@@ -132,5 +114,6 @@ fi
 
 # Initialzie tools
 eval "$(mise activate zsh)"
+eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
