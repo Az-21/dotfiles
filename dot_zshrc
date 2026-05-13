@@ -63,9 +63,21 @@ function y() {
 
 # Consistent utility across OSes
 function hash { shasum -a 256 "$@" }
+
 if command -v wl-copy >/dev/null 2>&1; then
   alias clipboard="wl-copy --trim-newline"
 fi
+
+open() {
+  if command -v dolphin > /dev/null 2>&1; then
+    nohup dolphin "${@:-.}" > /dev/null 2>&1 & disown
+  elif command -v open > /dev/null 2>&1; then
+    command open "${@:-.}"
+  else
+    return 1
+  fi
+}
+
 
 # zsh Plugins
 if [[ "$OSTYPE" == "darwin"* ]]; then
