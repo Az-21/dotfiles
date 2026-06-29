@@ -11,17 +11,6 @@ export MANPAGER="sh -c 'col -bx | bat -l man --plain'"
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# History
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=100000
-SAVEHIST=100000
-setopt APPEND_HISTORY        # Append instead of overwrite on exit
-setopt INC_APPEND_HISTORY    # Write to file immediately, not just on exit
-setopt SHARE_HISTORY         # Share history across all open sessions
-setopt HIST_IGNORE_DUPS      # Don't record consecutive duplicates
-setopt HIST_IGNORE_SPACE     # Don't record commands prefixed with a space
-setopt HIST_REDUCE_BLANKS    # Strip superfluous whitespace
-
 # Modern tooling
 alias cat="bat"
 alias cd="z"
@@ -42,7 +31,7 @@ alias tree="eza --icons --tree --group-directories-first"
 
 # GitHub Desktop Plus
 # Start from the repo folder for poorly configured git hooks
-alias ghplus="nohup github-desktop-plus > /dev/null 2>&1 & disown"
+alias ghplus="nohup desktop-plus > /dev/null 2>&1 & disown"
 
 # Arch extra/zed installs zed as zeditor
 if command -v zeditor >/dev/null 2>&1; then
