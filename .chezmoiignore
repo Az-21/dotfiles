@@ -8,5 +8,5 @@
 {{- if ne .chezmoi.os "windows" }}
 AppData/
 Documents/PowerShell
-dot_glzr/
+.glzr/
 {{- end }}
