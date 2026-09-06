@@ -24,6 +24,7 @@ function tree { eza --icons --tree --group-directories-first @args }
 
 # Consistent utility across OSes
 function clipboard { Set-Clipboard $args }
+function gitui { desktop-plus-cli $args }
 function hash { Get-FileHash $args }
 function open { explorer $args }
 function touch { $args | ForEach-Object { New-Item -ItemType File -Path $_ -Force } }
