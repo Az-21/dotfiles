@@ -13,8 +13,6 @@ Set-Alias find fd
 Set-Alias grep rg
 Set-Alias vi nvim
 Set-Alias vim nvim
-function pip { uv pip @args }
-function venv { uv venv @args }
 
 # eza (ls/tree replacements)
 function la { eza --icons --group-directories-first -la --header --git @args }
