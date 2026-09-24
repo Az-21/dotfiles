@@ -92,6 +92,11 @@ config.keys = {
 
   -- Reload config
   { key = "r", mods = "CTRL|SHIFT|ALT", action = act.ReloadConfiguration },
+
+  -- Swallow keys
+  { key = 'PageUp',   mods = 'NONE', action = act.Nop },
+  { key = 'PageDown', mods = 'NONE', action = act.Nop },
+  { key = 'z', mods = 'CTRL', action = act.Nop },
 }
 
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
