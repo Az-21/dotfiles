@@ -22,7 +22,6 @@ if ($env.TERM_PROGRAM? == "WezTerm") {
 
 # Modern tooling
 alias cat = bat
-alias grep = rg
 alias vi = nvim
 alias vim = nvim
 
