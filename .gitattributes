@@ -1,0 +1,3 @@
+# Normalize all text files to LF in the working tree on every platform.
+# Overrides core.autocrlf=true so templates render identical bytes everywhere.
+* text=auto eol=lf
