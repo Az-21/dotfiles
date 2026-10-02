@@ -1,22 +1,30 @@
-# Files ONLY for Linux
-{{- if ne .chezmoi.os "linux" }}
-.config/nushell/
+# Ignore everything by default
+**
+
+# All platforms
+!.gitconfig
+!.vimrc
+!.wezterm.lua
+!.config/
+!.config/mise/**
+
+# Linux
+{{- if eq .chezmoi.os "linux" }}
+!.zshrc
+!.config/zed/**
+!.config/nushell/**
 {{- end }}
 
-# Files ONLY for macOS
-{{- if ne .chezmoi.os "darwin" }}
-Library/Application Support/nushell/
+# macOS
+{{- if eq .chezmoi.os "darwin" }}
+!.zshrc
+!.config/zed/**
+!Library/**
 {{- end }}
 
-# Files ONLY for Linux and macOS
-{{- if not (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) }}
-.config/zed/
-.zshrc
-{{- end }}
-
-# Files ONLY for Windows
-{{- if ne .chezmoi.os "windows" }}
-AppData/
-Documents/PowerShell
-.glzr/
+# Windows
+{{- if eq .chezmoi.os "windows" }}
+!.glzr/**
+!AppData/**
+!Documents/**
 {{- end }}
