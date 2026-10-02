@@ -1,3 +1,13 @@
+# Files ONLY for Linux
+{{- if ne .chezmoi.os "linux" }}
+.config/nushell/
+{{- end }}
+
+# Files ONLY for macOS
+{{- if ne .chezmoi.os "darwin" }}
+Library/Application Support/nushell/
+{{- end }}
+
 # Files ONLY for Linux and macOS
 {{- if not (or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin")) }}
 .config/zed/
