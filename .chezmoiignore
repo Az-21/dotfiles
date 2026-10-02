@@ -10,14 +10,12 @@
 
 # Linux
 {{- if eq .chezmoi.os "linux" }}
-!.zshrc
 !.config/zed/**
 !.config/nushell/**
 {{- end }}
 
 # macOS
 {{- if eq .chezmoi.os "darwin" }}
-!.zshrc
 !.config/zed/**
 !Library/**
 {{- end }}
@@ -26,5 +24,4 @@
 {{- if eq .chezmoi.os "windows" }}
 !.glzr/**
 !AppData/**
-!Documents/**
 {{- end }}
