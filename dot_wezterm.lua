@@ -6,20 +6,8 @@ local is_linux = wezterm.target_triple:find("linux") ~= nil
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 local is_macos = wezterm.target_triple:find("darwin") ~= nil
 
-if is_linux then
-  -- Use zsh
-  config.default_prog = { "zsh" }
-end
-
-if is_macos then
-  -- Hide window decorations on Linux and macOS
-  config.window_decorations = "RESIZE"
-end
-
-if is_windows then
-  -- Use PowerShell 7+
-  config.default_prog = { "pwsh.exe", "-NoLogo" }
-end
+---- Shell
+config.default_prog = { "nu" }
 
 ---- Appearance & Behavior
 config.font = wezterm.font_with_fallback {
