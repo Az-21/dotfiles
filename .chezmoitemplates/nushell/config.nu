@@ -47,9 +47,10 @@ def --wrapped gitui [...args] {
 
 # Soruce
 use ($nu.data-dir | path join "init" "mise.nu")
+source ($nu.data-dir | path join "init" "atuin.nu")
+source ($nu.data-dir | path join "init" "carapace.nu")
 source ($nu.data-dir | path join "init" "starship.nu")
 source ($nu.data-dir | path join "init" "zoxide.nu")
-source ($nu.data-dir | path join "init" "atuin.nu")
 
 # Welcome
 fastfetch --logo-type small --structure Title:OS:Kernel:Memory:CPU:GPU
