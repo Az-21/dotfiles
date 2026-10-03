@@ -6,6 +6,7 @@ let tools = {
     atuin:    { atuin init nu }
     carapace: { carapace _carapace nushell }
     starship: { starship init nu }
+    tv:       { tv init nu }
     zoxide:   { zoxide init nushell }
 }
 

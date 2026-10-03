@@ -50,6 +50,7 @@ use ($nu.data-dir | path join "init" "mise.nu")
 source ($nu.data-dir | path join "init" "atuin.nu")
 source ($nu.data-dir | path join "init" "carapace.nu")
 source ($nu.data-dir | path join "init" "starship.nu")
+source ($nu.data-dir | path join "init" "tv.nu")
 source ($nu.data-dir | path join "init" "zoxide.nu")
 
 # Welcome
