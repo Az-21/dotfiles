@@ -46,6 +46,7 @@ def --wrapped gitui [...args] {
 }
 
 # Soruce
+use ($nu.default-config-dir | path join "functions.nu") *
 use ($nu.data-dir | path join "init" "mise.nu")
 source ($nu.data-dir | path join "init" "atuin.nu")
 source ($nu.data-dir | path join "init" "carapace.nu")
