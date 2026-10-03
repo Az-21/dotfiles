@@ -12,7 +12,6 @@ $env.config.completions.persistent_menus = true
 $env.config.filesize.unit = "binary"
 $env.config.highlight_resolved_externals = true
 $env.config.rm.always_trash = true
-$env.config.show_banner = false
 $env.config.table.index_mode = "auto"
 
 # https://github.com/wezterm/wezterm/discussions/5859
@@ -51,3 +50,7 @@ use ($nu.data-dir | path join "init" "mise.nu")
 source ($nu.data-dir | path join "init" "starship.nu")
 source ($nu.data-dir | path join "init" "zoxide.nu")
 source ($nu.data-dir | path join "init" "atuin.nu")
+
+# Welcome
+fastfetch --logo-type small --structure Title:OS:Kernel:Memory:CPU:GPU
+$env.config.show_banner = "short"
