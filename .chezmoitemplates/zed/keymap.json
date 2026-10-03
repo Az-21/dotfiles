@@ -1,6 +1,5 @@
 [
   {
-    "context": "Editor",
     "bindings": {
       "ctrl-a": "editor::SelectAll",
       "ctrl-c": "editor::Copy",
@@ -9,5 +8,6 @@
       "ctrl-x": "editor::Cut",
       "ctrl-z": "editor::Undo",
     },
+    "context": "Editor",
   },
 ]
