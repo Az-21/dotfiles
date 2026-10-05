@@ -45,6 +45,21 @@ def --wrapped gitui [...args] {
     job spawn { ^desktop-plus-cli ...$args } | ignore
 }
 
+# File manager
+def fm [path: path = "."] {
+    let target = ($path | path expand)
+
+    if $nu.os-info.name == "windows" {
+        ^explorer.exe $target
+    } else if $nu.os-info.name == "macos" {
+        ^open $target
+    } else if (which dolphin | is-not-empty) {
+        ^setsid -f dolphin $target
+    } else {
+        print -e $"(ansi yellow)fm: no supported file manager found(ansi reset)"
+    }
+}
+
 # Soruce
 use ($nu.default-config-dir | path join "functions.nu") *
 use ($nu.data-dir | path join "init" "mise.nu")
