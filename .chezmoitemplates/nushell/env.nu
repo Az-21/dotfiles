@@ -1,11 +1,11 @@
 use std/util "path add"
 
-let mise_shims = ($nu.home-dir | path join ".local" "share" "mise" "shims")
+const mise_shims = ($nu.home-dir | path join ".local" "share" "mise" "shims")
 if ($mise_shims | path exists) {
     path add $mise_shims
 }
 
-let init_dir = ($nu.data-dir | path join "init")
+const init_dir = ($nu.default-config-dir | path join "init")
 mkdir $init_dir
 
 let tools = {

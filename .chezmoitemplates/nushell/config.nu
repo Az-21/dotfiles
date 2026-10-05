@@ -61,13 +61,16 @@ def fm [path: path = "."] {
 }
 
 # Soruce
+const init_dir = ($nu.default-config-dir | path join "init")
+use ($init_dir | path join "mise.nu")
+source ($init_dir | path join "atuin.nu")
+source ($init_dir | path join "carapace.nu")
+source ($init_dir | path join "starship.nu")
+source ($init_dir | path join "tv.nu")
+source ($init_dir | path join "zoxide.nu")
+
+# Custom functions
 use ($nu.default-config-dir | path join "functions.nu") *
-use ($nu.data-dir | path join "init" "mise.nu")
-source ($nu.data-dir | path join "init" "atuin.nu")
-source ($nu.data-dir | path join "init" "carapace.nu")
-source ($nu.data-dir | path join "init" "starship.nu")
-source ($nu.data-dir | path join "init" "tv.nu")
-source ($nu.data-dir | path join "init" "zoxide.nu")
 
 # Welcome
 fastfetch --logo-type small --structure Title:OS:Kernel:Memory:CPU:GPU
