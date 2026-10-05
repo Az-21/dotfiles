@@ -10,10 +10,6 @@ local is_macos = wezterm.target_triple:find("darwin") ~= nil
 config.default_prog = { "nu" }
 
 ---- Appearance & Behavior
-config.font = wezterm.font_with_fallback {
-  "Monaspace Argon NF",
-  "JetBrains Mono",
-}
 config.font_size = 16
 config.initial_cols = 120
 config.initial_rows = 30
