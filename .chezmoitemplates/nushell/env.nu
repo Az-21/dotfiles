@@ -11,7 +11,6 @@ mkdir $init_dir
 let tools = {
     mise:     { mise activate nu }
     atuin:    { atuin init nu }
-    carapace: { carapace _carapace nushell }
     starship: { starship init nu }
     tv:       { tv init nu }
     zoxide:   { zoxide init nushell }

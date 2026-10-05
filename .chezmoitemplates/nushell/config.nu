@@ -64,7 +64,6 @@ def fm [path: path = "."] {
 const init_dir = ($nu.default-config-dir | path join "init")
 use ($init_dir | path join "mise.nu")
 source ($init_dir | path join "atuin.nu")
-source ($init_dir | path join "carapace.nu")
 source ($init_dir | path join "starship.nu")
 source ($init_dir | path join "tv.nu")
 source ($init_dir | path join "zoxide.nu")

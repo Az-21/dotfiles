@@ -1,7 +1,6 @@
 [tools]
 atuin = "latest"
 bat = "latest"
-carapace = "latest"
 chezmoi = "latest"
 claude = "latest"
 codex = "latest"
