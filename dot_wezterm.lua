@@ -13,7 +13,6 @@ config.default_prog = { "nu" }
 config.font_size = 16
 config.initial_cols = 120
 config.initial_rows = 30
-config.window_padding = 16
 
 config.hide_mouse_cursor_when_typing = true
 config.scrollback_lines = 10000
